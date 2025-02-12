@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Life Timer</title>
+    <style>
+        body {
+            background: black;
+            color: red;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 10px red;
+            animation: flicker 1.5s infinite alternate;
+        }
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        #timer {
+            font-size: 2em;
+            background: darkred;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 20px red;
+        }
+        .skull {
+            font-size: 100px;
+            animation: shake 2s infinite;
+        }
+        @keyframes shake {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Tick... Tock...Raj Your Time is Running Out!!!</h1>
+    <div class="skull">☠️</div>
+    <div id="timer"></div>
+    <script>
+        function updateTimer() {
+            const birthYear = new Date().getFullYear() - 30; // Assuming you are 30
+            const deathYear = birthYear + 70; // Assuming you live till 70
+            const deathDate = new Date(deathYear, 0, 1); // January 1st of that year
+            const now = new Date();
+            const diff = deathDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+            
+            document.getElementById('timer').innerHTML = 
+                `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds left...`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
+
